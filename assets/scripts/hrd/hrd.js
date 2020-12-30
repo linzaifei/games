@@ -1,10 +1,11 @@
 import { roleConfig, levelConfig } from './roleConfig'
 import util from '../util/util'
-import globalData from './globalData'
+import globalData from '../custom/global'
 const MIN_DISTANCE = 60; //最大偏移量
+const MOVE_DURATION = 0.3//动画时间
 const HCOUNTS = 4 //水平等于4
 const VCOUNTS = 5 //垂直等于5
-const MOVE_DURATION = 0.3
+
 cc.Class({
     extends: cc.Component,
 
@@ -20,12 +21,10 @@ cc.Class({
         titleLabel: cc.Label,//标题
         targetLabel: cc.Label,//目标部署
         tipBox: cc.Node,
-
-
+        contentLabel: cc.Label,
     },
     start() {
         //计算ItemSize 
-
         const w = this.gameBox.width
         this.itemSize = (w - this.space * (HCOUNTS + 1)) / HCOUNTS;
         this.onDraw();
@@ -402,6 +401,7 @@ cc.Class({
         if (empty_x == 1 && empty_y == 0) {
             console.log('====恭喜你你成功了哈哈哈')
             this.tipBox.active = true
+            this.contentLabel.string = '恭喜你完成本关，移动步数：' + this.step
         }
     }
 

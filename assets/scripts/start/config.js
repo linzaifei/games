@@ -6,10 +6,12 @@ export const startData = [
     },
     {
         "title": "经典华容道",
-        "scene": "hrdList"
+        "scene": "hrdList",
+        "type": 0,
     },
     {
         "title": "数字华容道",
-        "scene": ""
+        "scene": "hrdList",
+        "type": 1,
     }
 ]

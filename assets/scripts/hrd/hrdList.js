@@ -1,7 +1,7 @@
 
 
 import { levelConfig } from './roleConfig'
-import globalData from './globalData'
+import globalData from '../custom/global'
 cc.Class({
     extends: cc.Component,
 
@@ -11,9 +11,12 @@ cc.Class({
         backBtn: cc.Node
     },
 
-    start() {
+    onLoad() {
+        this.type = globalData.type
         this.init()
+    },
 
+    start() {
         this.backBtn.on('touchstart', () => {
             cc.director.loadScene("start")
         })
@@ -21,23 +24,50 @@ cc.Class({
     onDestroy() {
         console.log('销毁hrdList')
         this.backBtn.off('touchstart');
+        this.blocks.map(item => {
+            item.off(cc.Node.EventType.TOUCH_START)
+        })
     },
 
+
+
     init() {
-        console.log('=====', Object.values(levelConfig))
-        Object.values(levelConfig).map((item, index) => {
-            this.onCreateItem(item, index)
-        })
+        this.blocks = [];
+        if (this.type == 0) {
+            Object.values(levelConfig).map((item, index) => {
+                this.onCreateItem(item, index)
+            })
+        } else if (this.type == 1) {
+            const arr = [{
+                title: '3X3',
+                level: 1,
+            }, {
+                title: '4X4',
+                level: 2,
+            }, {
+                title: '5X5',
+                level: 3,
+            }, {
+                title: '6X6',
+                level: 4,
+            }];
+            arr.map((item, index) => {
+                this.onCreateItem(item, index)
+            })
+        }
     },
 
     onCreateItem(item, index) {
         const itemPrefab = cc.instantiate(this.itemPrefab);
         itemPrefab.getComponent('item').setTitle(item.title)
-
+        this.blocks.push(itemPrefab);
         itemPrefab.on(cc.Node.EventType.TOUCH_START, () => {
-            console.log('===哈哈哈', item);
-            globalData.level = index + 1;
-            cc.director.loadScene('hrd')
+            if (this.type == 0) {
+                globalData.level = index + 1;
+            } else {
+                globalData.nubLevel = index + 1;
+            }
+            cc.director.loadScene(this.type == 0 ? 'hrd' : 'nubHrd')
         })
         this.content.addChild(itemPrefab)
     },
