@@ -136,7 +136,7 @@ export const levelConfig = {
         "title": '前呼后拥',
         "targetStep": 112,
         "layout": [
-            [12, 3, 12, 5],
+            [12, 3, 0, 5],
             [12, 3, 0, 5],
             [9, 12, 1, 1],
             [9, 12, 1, 1],

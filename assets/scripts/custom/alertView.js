@@ -11,21 +11,34 @@ cc.Class({
     properties: {
         titleLabel: cc.Label,
         contentLabel: cc.Label,
-        tipBg: cc.Graphics,
+        alertBg: cc.Graphics,
+        confromBtn: cc.Button,
+        cancelBtn: cc.Button,
+        radius: 20,
     },
     start() {
         this.onDraw();
+        this.confromBtn.node.on('click', () => {
+            this.node.emit('click', 1);
+        }, this)
+        this.cancelBtn.node.on('click', () => {
+            this.node.emit('click', 0);
+        }, this)
     },
     onDraw() {
         const w = this.node.width;
         const h = this.node.height;
-        console.log('=wh111=', w, h)
-        this.tipBg.roundRect(0, 0, w, h, 20)
-        this.tipBg.fill()
+        this.alertBg.roundRect(0, 0, w, h, this.radius)
+        this.alertBg.fill()
     },
     setTitle(title) {
         if (title) {
             this.titleLabel.string = title;
+        }
+    },
+    setContent(content) {
+        if (content) {
+            this.contentLabel.string = content;
         }
     }
 

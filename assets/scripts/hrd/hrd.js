@@ -20,8 +20,7 @@ cc.Class({
         stepLabel: cc.Label,//通过步骤
         titleLabel: cc.Label,//标题
         targetLabel: cc.Label,//目标部署
-        tipBox: cc.Node,
-        contentLabel: cc.Label,
+        alertViewPerfab: cc.Prefab,
     },
     start() {
         //计算ItemSize 
@@ -30,6 +29,11 @@ cc.Class({
         this.onDraw();
         this.reStart()
         this.addEventHandler()
+
+        this.alertView = cc.instantiate(this.alertViewPerfab);
+        this.node.addChild(this.alertView)
+
+
 
     },
     onLoad() {
@@ -48,7 +52,7 @@ cc.Class({
         this.targetLabel.string = config.targetStep;
         this.titleLabel.string = config.title;
         this.stepLabel.string = this.step;
-        this.tipBox.active = false
+        // this.tipBox.active = false
     },
     onDraw() {
         const w = this.gameBox.width;
@@ -400,8 +404,14 @@ cc.Class({
         console.log('=position===', empty_y, empty_x)
         if (empty_x == 1 && empty_y == 0) {
             console.log('====恭喜你你成功了哈哈哈')
-            this.tipBox.active = true
-            this.contentLabel.string = '恭喜你完成本关，移动步数：' + this.step
+
+            this.alertView.active = true
+            this.alertView.getComponent('alertView').setContent('恭喜你完成本关，移动步数：' + this.step)
+            this.alertView.on('click', (idx) => {
+                console.log('点击23', idx)
+                this.alertView.active = false
+                this.onClickItem('', idx)
+            })
         }
     }
 

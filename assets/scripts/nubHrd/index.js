@@ -9,6 +9,8 @@ import util from '../util/util'
 import schedule from '../util/schedule'
 import globalData from '../custom/global'
 import { getArrWithLevel } from './nubConfig'
+import { setLevelData, getLevelData } from './NubStore'
+
 const MIN_DISTANCE = 60; //最大偏移量
 const MOVE_DURATION = 0.3//动画时间
 cc.Class({
@@ -21,6 +23,7 @@ cc.Class({
         levelLabel: cc.Label, //等级label
         timeLabel: cc.Label,//通过步骤
         bestLabel: cc.Label,//标题
+        tipBox: cc.Node,
         space: 10,//间隔
         count: 4,// 个数
         level: 2,
@@ -30,14 +33,11 @@ cc.Class({
         this.onDraw();
         this.onDrawBlock();
         this.addEventHandler()
-        //开始定时器
-        schedule.startTime(this, (time) => {
-            this.timeLabel.string = time
-        })
+        this.startTimer();
     },
     onDestroy() {
         console.log('销毁unbHrd');
-        schedule.stopTime(this)
+        this.stopTimer();
         this.removeEventHandler()
     },
 
@@ -46,13 +46,19 @@ cc.Class({
         this.count = this.level == 1 ? 3 : this.level == 2 ? 4 : this.level == 3 ? 5 : this.level == 4 ? 6 : 3
         console.log('wolail ===', globalData.nubLevel, this.count)
 
+
+        const best = getLevelData(this.level);
+        this.bestLabel.string = best ? best : '00:00:00'
+        console.log('data-', best)
+
     },
     init() {
+        if (this.count > 6 || this.count < 3) return
         const w = this.gameBox.width
         this.itemSize = (w - this.space * (this.count + 1)) / this.count;
         this.dataArr = getArrWithLevel(this.level, this.count).dataArr
         console.log('=blockArr==', this.dataArr)
-
+        this.tipBox.active = false;
 
     },
     onDraw() {
@@ -64,6 +70,15 @@ cc.Class({
         this.gameBg.fill()
     },
 
+    startTimer() {
+        //开始定时器
+        schedule.startTime(this, (time) => {
+            this.timeLabel.string = time
+        })
+    },
+    stopTimer() {
+        schedule.stopTime(this)
+    },
 
     addEventHandler() {
         this.gameBox.on('touchstart', (event) => {
@@ -243,7 +258,7 @@ cc.Class({
     //游戏结束
     onGameOnver() {
         //1.获取曹操位置信息
-        console.log('=position===', this.dataArr)
+        console.log('=position===', this.dataArr, this.count * this.count)
 
         let count = 0;
         for (let y = this.count - 1; y >= 0; y--) {
@@ -252,14 +267,24 @@ cc.Class({
                 count++
                 if (element) {
                     if (count != element) {
-                        break;
+                        return false;
                     }
                     console.log('===element x,y', element)
                 }
             }
         }
-
         console.log('count', count)
-    }
+        if (count == (this.count * this.count)) {
+            console.log('恭喜你成功了')
+            this.stopTimer()
+            setLevelData(this.level, this.timeLabel.string)
 
+            this.tipBox.active = true;
+            const timer = setTimeout(() => {
+                this.tipBox.active = false;
+                clearTimeout(timer)
+            }, 1000)
+
+        }
+    }
 });
