@@ -23,10 +23,31 @@ function spliceArr(arr, count = 3) {
     return dataArr;
 }
 
+export function forIn(row, col, callback, rowbcak) {
+    for (let x = 0; x < row; x++) {
+        rowbcak && rowbcak(x)
+        for (let y = 0; y < col; y++) {
+            callback && callback(x, y)
+        }
+    }
+}
+
+//数组旋转90度
+export function rotateArr(arr) {
+    const len = arr.length;
+    const rotaArr = []
+    forIn(len, len, (x, y) => {
+        rotaArr[x][y] = arr[y][len - 1 - x];
+    }, (x) => {
+        rotaArr[x] = []
+    })
+    return rotaArr;
+}
 
 
 export default {
     getReverseArr,
     randomArr,
     spliceArr,
+
 }
