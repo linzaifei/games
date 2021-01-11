@@ -1,6 +1,8 @@
 
 import { forIn, rotateArr } from '../util/util'
 import { defaultColor, perviewColor, shapeType, shapeColors } from './tetris-type'
+
+import localStorage from '../custom/localStorage'
 const itemSize = 30;
 const DROPSPEED = 500;
 const MIN_DISTANCE = 50;
@@ -12,11 +14,16 @@ cc.Class({
         gameBox: cc.Node,
         containerBlock: cc.Graphics,
         perviewBlock: cc.Graphics,
+        scoreLabel: cc.Label,
+        gameOverBox: cc.Node,
+        gScoreLabel: cc.Label,
+        bestScoreLabel: cc.Label,
+
         space: 1,//用来表示每一个小模块间距
+        score: 0
     },
     onLoad() {
-        // console.log(this.containerBlock)
-        // console.log('=', this.gameBox.width)
+
         const w = this.gameBox.width
         this.row = Math.floor((w - this.space) / (itemSize + this.space));
         this.col = this.row * 2;
@@ -25,10 +32,11 @@ cc.Class({
         this.randomShape = ''; //用来存储随机产生的形状
         this.shapeColor = '';//用来存储当前图形的颜色
         this.fps = 0;
-        this.dropSpeed = DROPSPEED;
+        this.dropSpeed = DROPSPEED; //下落速度
         this.x = 3; //用来记录当前
         this.y = this.col;
-        // console.log('=x=', this.row, this.col)
+        this.gameBox.height = this.col * (itemSize + this.space)
+
     },
     start() {
         this.init();
@@ -39,6 +47,9 @@ cc.Class({
             this.fps = 0;
             this.onDropDown()
         }
+    },
+    onDestroy() {
+        this.saveScore()
     },
     addEventHandler() {
         this.gameBox.on(cc.Node.EventType.TOUCH_START, (event) => {
@@ -99,9 +110,24 @@ cc.Class({
         })
         this.onDrawRandomShape()
         this.addEventHandler()
+        this.gameOverBox.active = false;
+        this.scoreLabel.string = 'score: ' + this.score;
         console.log('==', this.containerColors)
     },
+    onClickItem(op, idx) {
+        console.log('=====', idx)
+        switch (parseInt(idx)) {
+            case 0:
+                cc.director.loadScene('start')
+                break;
+            case 1:
+                this.score = 0
+                this.removeEventHandler()
+                this.init()
+                break;
 
+        }
+    },
     //绘制随机图形
     onDrawRandomShape() {
         const keys = Object.keys(shapeType);
@@ -232,6 +258,27 @@ cc.Class({
             this.drawBgRect(x, y, this.containerColors[x][y])
         })
     },
+
+    //游戏结束
+    gameover() {
+        this.removeEventHandler()
+        this.gameOverBox.active = true;
+        this.gScoreLabel.string = 'score: ' + this.score;
+        this.saveScore((besttetris) => {
+            this.bestScoreLabel.string = 'best score: ' + besttetris;
+        })
+
+    },
+    //保存积分
+    saveScore(callback) {
+        let besttetris = localStorage.getTrteisScore();
+        console.log('===', besttetris)
+        if (parseInt(besttetris) < this.score) {
+            besttetris = this.score;
+            localStorage.setTrteisScore(this.score)
+        }
+        callback && callback(besttetris)
+    },
     //下落结束
     onDropEnd() {
         this.dropSpeed = DROPSPEED;
@@ -239,6 +286,8 @@ cc.Class({
         const len = this.randomShape.length;
         if ((len + this.y) >= this.col) {
             console.log('到顶了拜拜', len + this.y, this.col)
+            this.gameover()
+
             return;
         }
         //2.渲染当前视图并且保存到containerColors 里面
@@ -256,39 +305,26 @@ cc.Class({
         }, (y) => {
             canFullArr[y] = [];
         })
+
+        let idx = 0
         for (let i = 0; i < canFullArr.length; i++) {
             const canfull = canFullArr[i].every(item => item)
             console.log('canfull', canfull, i)
             //准备开始消除
             if (canfull) {
-                for (m = 0; m < this.row; m++)
-                    for (n = i; n < this.col; n++) {
+                for (m = 0; m < this.row; m++) {
+                    for (n = i - idx; n < this.col; n++) {
                         if (n < this.col - 1) {
                             this.containerColors[m][n] = this.containerColors[m][n + 1]
                         }
                     }
-                // forIn(this.row, this.col, (x, y) => {
-                //     if (y == i) {
-                //         this.containerColors[x][y] = defaultColor;
-                //     }
-                //     this.containerColors[x][y] = this.containerColors[x][y + 1]
-                // })
+                }
+                idx = 1
+                this.score += 10;
             }
         }
-
-
-
         this.updateBgRect();
-
-        // for (let i = 0; i < this.row; i++) {
-        //     const arr = this.containerColors[0];
-        //     console.log('arr', arr)
-
-        // }
-
-
-
-
+        this.scoreLabel.string = 'score:' + this.score;
         //开始新的
         this.y = this.col;
         this.x = 3;

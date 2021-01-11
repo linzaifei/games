@@ -1,6 +1,6 @@
 
 
-export const defaultColor = '#3D3C3C'
+export const defaultColor = '#aaaaaa'
 export const perviewColor = '#999999'
 export const shapeColors = {
     T: '#8039D1',

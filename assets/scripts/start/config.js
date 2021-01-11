@@ -13,5 +13,9 @@ export const startData = [
         "title": "数字华容道",
         "scene": "hrdList",
         "type": 1,
+    },
+    {
+        "title": "俄罗斯方块",
+        "scene": "tetris"
     }
 ]

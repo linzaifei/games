@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        299.64478970941576,
+        301.37684051698466,
         0,
         0,
         0,
@@ -540,14 +540,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 118,
-      "g": 110,
-      "b": 101,
+      "r": 120,
+      "g": 105,
+      "b": 90,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 222.46,
+      "width": 240,
       "height": 100.8
     },
     "_anchorPoint": {
@@ -559,7 +559,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -228.76999999999998,
+        -226.25,
         0,
         0,
         0,
@@ -605,8 +605,10 @@
     "_fontSize": 100,
     "_lineHeight": 80,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 1,
@@ -629,7 +631,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 10,
-    "_left": 20,
+    "_left": 13.75,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -843,7 +845,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 56,
+      "width": 64,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -898,11 +900,13 @@
     "_useOriginalSize": false,
     "_string": "分数",
     "_N$string": "分数",
-    "_fontSize": 28,
+    "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -969,7 +973,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 38.93,
+      "width": 42,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1027,8 +1031,10 @@
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 1,
@@ -1324,7 +1330,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 120,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1379,11 +1385,13 @@
     "_useOriginalSize": false,
     "_string": "历史排行",
     "_N$string": "历史排行",
-    "_fontSize": 28,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1450,7 +1458,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 38.93,
+      "width": 42,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1508,8 +1516,10 @@
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 1,
@@ -1772,7 +1782,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 276.74,
+      "width": 282,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -1830,8 +1840,10 @@
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 1,
@@ -1854,7 +1866,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 9,
-    "_left": 20,
+    "_left": 17.370000000000005,
     "_right": 0,
     "_top": 20,
     "_bottom": 0,
@@ -1898,7 +1910,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 276.74,
+      "width": 282,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -1951,13 +1963,15 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "滑动数字快合成2048",
-    "_N$string": "滑动数字快合成2048",
+    "_string": "滑动数字块合成2048",
+    "_N$string": "滑动数字块合成2048",
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -1980,7 +1994,7 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 12,
-    "_left": 20,
+    "_left": 17.370000000000005,
     "_right": 0,
     "_top": 0,
     "_bottom": 20,
@@ -2217,8 +2231,10 @@
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -2633,8 +2649,10 @@
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": false,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "9e5d22f5-063a-499b-bcb7-aae9495b7cb7"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
@@ -6195,7 +6213,7 @@
     },
     "_enabled": true,
     "blockPrefab": {
-      "__uuid__": "5c4199df-4bfc-41f8-bfb4-0937158f354e"
+      "__uuid__": "01045af8-ecd8-4ccb-a964-595f5d6941ec"
     },
     "gap": 20,
     "bg": {
@@ -6235,9 +6253,6 @@
     },
     "gameOverLabel": {
       "__id__": 77
-    },
-    "shareButton": {
-      "__id__": 94
     },
     "rankBox": {
       "__id__": 98
