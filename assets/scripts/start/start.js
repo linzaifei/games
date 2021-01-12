@@ -13,10 +13,25 @@ cc.Class({
 
 
     start() {
-        AppManager.login()
-        wxCloudManager.initCloud()
-
+        // AppManager.login()
+        // wxCloudManager.initCloud()
         this.init()
+        this.passiveShare()
+    },
+
+    //被动分享
+    passiveShare() {
+        console.log('passive share!');
+        if (typeof wx === 'undefined') {
+            return;
+        }
+        wx.showShareMenu();
+        wx.onShareAppMessage(() => {
+            return {
+                title: '块分享给你的小伙伴吧！',
+                // imageUrl: cc.url.raw('resources/share.png'),
+            }
+        });
     },
 
     init() {

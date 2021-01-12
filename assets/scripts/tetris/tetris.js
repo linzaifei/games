@@ -3,13 +3,12 @@ import { forIn, rotateArr } from '../util/util'
 import { defaultColor, perviewColor, shapeType, shapeColors } from './tetris-type'
 
 import localStorage from '../custom/localStorage'
-const itemSize = 30;
-const DROPSPEED = 500;
+const itemSize = 45;
+const DROPSPEED = 600;
 const MIN_DISTANCE = 50;
 
 cc.Class({
     extends: cc.Component,
-
     properties: {
         gameBox: cc.Node,
         containerBlock: cc.Graphics,
@@ -18,7 +17,6 @@ cc.Class({
         gameOverBox: cc.Node,
         gScoreLabel: cc.Label,
         bestScoreLabel: cc.Label,
-
         space: 1,//用来表示每一个小模块间距
         score: 0
     },
@@ -52,21 +50,21 @@ cc.Class({
         this.saveScore()
     },
     addEventHandler() {
-        this.gameBox.on(cc.Node.EventType.TOUCH_START, (event) => {
+        this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
             this.onTouchStart(event);
         })
-        this.gameBox.on(cc.Node.EventType.TOUCH_END, (event) => {
+        this.node.on(cc.Node.EventType.TOUCH_END, (event) => {
             this.onTouchEnd(event);
         })
-        this.gameBox.on(cc.Node.EventType.TOUCH_CANCEL, (event) => {
+        this.node.on(cc.Node.EventType.TOUCH_CANCEL, (event) => {
             this.onTouchEnd(event);
         })
     },
     //移除手势
     removeEventHandler() {
-        this.gameBox.off(cc.Node.EventType.TOUCH_START)
-        this.gameBox.off(cc.Node.EventType.TOUCH_END)
-        this.gameBox.off(cc.Node.EventType.TOUCH_CANCEL)
+        this.node.off(cc.Node.EventType.TOUCH_START)
+        this.node.off(cc.Node.EventType.TOUCH_END)
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL)
     },
     onTouchStart(event) {
         this.startPoint = event.getLocation();
@@ -312,8 +310,8 @@ cc.Class({
             console.log('canfull', canfull, i)
             //准备开始消除
             if (canfull) {
-                for (m = 0; m < this.row; m++) {
-                    for (n = i - idx; n < this.col; n++) {
+                for (let m = 0; m < this.row; m++) {
+                    for (let n = i - idx; n < this.col; n++) {
                         if (n < this.col - 1) {
                             this.containerColors[m][n] = this.containerColors[m][n + 1]
                         }
@@ -336,7 +334,7 @@ cc.Class({
         const d_x = (itemSize + this.space) * x;
         const d_y = (itemSize + this.space) * y;
         this.containerBlock.fillColor = new cc.Color().fromHEX(color)
-        this.containerBlock.roundRect(d_x, d_y, itemSize, itemSize, 0);
+        this.containerBlock.roundRect(d_x, d_y, itemSize, itemSize, 5);
         this.containerBlock.fill()
     },
     //绘制预览图形
@@ -344,7 +342,7 @@ cc.Class({
         const d_x = (itemSize + this.space) * x;
         const d_y = (itemSize + this.space) * y;
         this.perviewBlock.fillColor = new cc.Color().fromHEX(color)
-        this.perviewBlock.roundRect(d_x, d_y, itemSize, itemSize, 0);
+        this.perviewBlock.roundRect(d_x, d_y, itemSize, itemSize, 5);
         this.perviewBlock.fill()
     },
 

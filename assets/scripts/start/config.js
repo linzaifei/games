@@ -17,5 +17,9 @@ export const startData = [
     {
         "title": "俄罗斯方块",
         "scene": "tetris"
+    },
+    {
+        "title": "俄罗斯方块-放置",
+        "scene": "tetrisPlace"
     }
 ]
